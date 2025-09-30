@@ -4,3 +4,4 @@ python-engineio
 python-socketio
 gunicorn
 gevent
+gevent-websocket  # ★この行を追加
