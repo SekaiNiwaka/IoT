@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>IoT通信</title>
+        <link rel="stylesheet" type="text/css" href="design.css">
+    </head>
+
+    <body>
+        <header>
+            <div class="en"></div>
+            <h1>IoTものづくり実習</h1>
+            <h2>＜班名＞　無線を解禁された男達<br>＜作品名＞　　 パルスフィーリング</h2>
+        </header>
+
+        <hr>
+
+        <main>
+            <h3>【ユーザー情報】 未ログイン</h3>
+            <div class="time">
+                <div class="value">
+                    <h3>就寝予定</h3>
+                    <h4 class="yote" id="sleep-yote">12時30分</h4>
+                </div>
+                
+                <div class="value">
+                    <h3>就寝時刻</h3>
+                    <h4 class="fact" id="sleep-fact">12時30分</h4>
+                </div>
+
+                <div class="value">
+                    <h3>起床予定</h3>
+                    <h4 class="yote" id="wake-yote">12時30分</h4>
+                </div>
+
+                <div class="value">
+                    <h3>起床時刻</h3>
+                    <h4 class="fact" id="wake-fact">12時30分</h4>
+                </div>
+            </div>
+
+            <br>
+
+            <div>
+                <h3 id="last-measure">【前回の測定】 2025年9月30日 16時30分</h3> 
+                <h3 id="next-measure">【次回測定予定】 4時間後</h3>
+                <div class="measure">
+                    <div class="one">
+                        <h5 id="pulse-data"><span>脈拍</span> 125</h5>
+                    </div>
+                    <br>
+                    <div class="two">
+                        <h5 id="oxygen-data"><span>血中酸素濃度</span> 98％</h5>
+                    </div>
+                    <br>
+                    <div class="three">
+                        <h5 id="condition-data"><span>体調</span> 良い</h5>
+                    </div>
+                </div>
+                <br>
+                <div class="but">
+                    <button class="ema" type="button">緊急開錠ボタン</button>
+                    <br>
+                    <br>
+                    <h5>※このボタンを押すと、ユーザーの住居の鍵が開き近隣の方に安否確認を要請できます。</h5>
+                    
+                    <br>
+
+                    <div class="his">
+                        <span id="key-output"></span>
+                    </div>
+                </div> 
+            </div>
+        </main>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.js"></script>
+        <script src="script.js"></script>
+    </body>
+</html>

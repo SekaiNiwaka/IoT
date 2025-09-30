@@ -1,0 +1,163 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    font-family: 'HGP明朝B', serif;
+}
+
+header{
+    color: white;
+    background-color: black;
+}
+
+h1, h2{
+    text-align: center;
+    margin: 0;
+}
+
+h1{
+    color: yellow;
+    font-size: 30px;
+}
+
+h2{
+    font-size: 10px;
+}
+
+h3{
+    font-size: 15px;
+}
+
+h4{
+    margin: auto;
+    border: solid;
+    font-size: 10px;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.value{
+    text-align: center;
+    margin-left: 2%;
+}
+
+main{
+    color: white;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.time{
+    display: flex;
+    justify-content: center;
+}
+
+.yote{
+    border-color: orange;
+    padding: 20px;
+}
+
+.fact{
+    border-color: rgb(84, 221, 84);
+    padding: 20px;
+}
+
+.measure{
+    border: solid;
+    border-color: rgb(50, 184, 150);
+    border-radius: 15px;
+    padding: 3%;
+    margin: 2%;
+}
+
+h5{
+    margin: 10px;
+    font-size: 25px;
+}
+
+h6{
+    margin: 0;
+    font-size: 15px;
+}
+
+/* ★修正後のCSS: ネストを解消し、標準的な書き方（直下の子孫セレクタ `>`）を使用 */
+.one span{ 
+    border: solid;
+    padding: 5px 15px;
+    border: 2px solid #ceff7e; 
+    border-radius: 9999px; 
+}
+
+.two span{
+    border: solid;
+    padding: 5px 15px;
+    border: 2px solid rgb(89, 115, 233); 
+    border-radius: 9999px; 
+}
+
+.three span{
+    border: solid;
+    padding: 5px 15px;
+    border: 2px solid rgb(255, 114, 161); 
+    border-radius: 9999px; 
+}
+
+/* ボタンのデフォルトスタイル（変更なし） */
+button{
+    font-family: 'HGP明朝B', serif;
+    padding: 10px 20px;
+    font-size: 15px;
+    color: rgb(255, 0, 0);
+    background-color: rgba(0, 0, 0, 0);
+    border: 2px solid rgb(213, 1, 255); 
+    border-radius: 9999px; 
+}
+
+.but{
+    text-align: center;
+}
+
+.en{
+    position: fixed;
+    left: 10px;
+    top: 6px;
+    width: 40px;
+    height: 40px;
+    border: 2px solid white; 
+    background-color: transparent; 
+    border-radius: 50%;
+}
+
+/* ★開錠ボタンを押したときのフィードバック (真っ赤) */
+.clicked-feedback-red {
+    background-color: red !important;
+    border-color: red !important;
+    color: white !important;
+}
+
+/* ★施錠ボタンを押したときのフィードバック (真っ青) */
+.clicked-feedback-blue {
+    background-color: rgb(89, 115, 233) !important; 
+    border-color: rgb(89, 115, 233) !important;
+    color: white !important;
+}
+
+/* 「施錠」状態のボタン（開錠後、デフォルトの見た目）のスタイル */
+.locked {
+    color: white !important;
+    background-color: rgba(0, 0, 0, 0) !important;
+    border-color: rgb(89, 115, 233) !important;
+}
+
+.his {
+    /* キー入力を表示する領域のスタイル */
+    margin-top: 15px;
+    padding: 10px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    min-height: 50px; 
+    word-wrap: break-word; 
+    text-align: left;
+    color: #ceff7e;
+    font-size: 14px;
+}
