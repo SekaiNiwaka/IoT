@@ -205,31 +205,34 @@ document.addEventListener('DOMContentLoaded', () => {
     // 4. 緊急開錠ボタンの処理 (サーバー同期を追加)
     // ----------------------------------------------------
     if (emergencyButton && fixedCircle) {
-        emergencyButton.addEventListener('click', () => {
-            const feedbackClass = isLockedOpen ? blueFeedback : redFeedback;
-            emergencyButton.classList.add(feedbackClass);
+    emergencyButton.addEventListener('click', () => {
+        const feedbackClass = isLockedOpen ? blueFeedback : redFeedback;
+        emergencyButton.classList.add(feedbackClass);
+        
+        // ボタン状態をサーバーに送るため、setTimeout外で処理
+        const newState = !isLockedOpen; 
+
+        setTimeout(() => {
+            emergencyButton.classList.remove(feedbackClass); 
             
-            // ボタン状態をサーバーに送るため、setTimeout外で処理
-            const newState = !isLockedOpen; 
+            // DOMを更新
+            updateButtonState(newState);
 
-            setTimeout(() => {
-                emergencyButton.classList.remove(feedbackClass); 
-                
-                // DOMを更新
-                updateButtonState(newState);
+            // ★修正点: updateButtonState実行後にDOMから最新の状態を取得して送信する
+            const buttonData = {
+                text: emergencyButton.textContent,
+                is_locked_open: isLockedOpen,
+                // クラス名全体から 'ema' を除いた状態クラス ('locked') のみを取得
+                class: emergencyButton.className.replace('ema', '').trim(), 
+                // ★最新の円の色をDOMから取得
+                en_color: fixedCircle.style.backgroundColor 
+            };
+            
+            sendDataUpdate('button_state', buttonData);
 
-                // サーバーに更新を通知
-                const buttonData = {
-                    text: emergencyButton.textContent,
-                    is_locked_open: isLockedOpen,
-                    class: emergencyButton.className.includes('locked') ? 'locked' : '',
-                    en_color: fixedCircle.style.backgroundColor
-                };
-                sendDataUpdate('button_state', buttonData);
-
-            }, 200); 
-        });
-    }
+        }, 200); 
+    });
+}
 
     /**
      * ボタンのDOMと変数を更新するヘルパー関数
@@ -365,12 +368,14 @@ document.addEventListener('DOMContentLoaded', () => {
      * 他のクライアントからボタンの状態が更新されたときの処理
      */
     socket.on('button_state_updated', (state) => {
-        console.log('Button state updated:', state);
-        isLockedOpen = state.is_locked_open;
-        fixedCircle.style.backgroundColor = state.en_color;
-        emergencyButton.textContent = state.text;
-        emergencyButton.className = 'ema ' + state.class; 
-    });
+    console.log('Button state updated:', state);
+    isLockedOpen = state.is_locked_open;
+    // ★修正点: 受信した最新の色でDOMを更新
+    fixedCircle.style.backgroundColor = state.en_color;
+    emergencyButton.textContent = state.text;
+    // クラス名全体を更新
+    emergencyButton.className = 'ema ' + state.class; 
+});
 
     /**
      * 他のクライアントからのキー入力を表示に反映する処理
