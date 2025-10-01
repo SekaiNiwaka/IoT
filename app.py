@@ -70,11 +70,14 @@ def handle_update_data(data):
         # 自身を除く全てのクライアントに更新されたデータをブロードキャスト
         emit('data_updated', {'key': key, 'value': value}, broadcast=True, include_self=False)
         
-        # ※ボタンの状態は特殊なため、個別に処理 (下記参照)
-        
     elif key == 'button_state':
-        # ボタンの状態 (テキスト, 色, クラス) を更新
+        # ★修正点: button_state全体を更新
         global_state['button_state'] = value
+        
+        # ★修正点: 左上の円の色をグローバルステートの最上位に反映
+        global_state['en_color'] = value['en_color'] 
+        
+        # 自身を除く全てのクライアントにボタン状態をブロードキャスト
         emit('button_state_updated', value, broadcast=True, include_self=False)
 
 
