@@ -322,10 +322,11 @@ document.addEventListener('DOMContentLoaded', () => {
         wakeFactElement.textContent = state.wake_fact;
         
         // ボタン同期
-        isLockedOpen = state.button_state.is_locked_open;
-        fixedCircle.style.backgroundColor = state.button_state.en_color;
-        emergencyButton.textContent = state.button_state.text;
-        emergencyButton.className = 'ema ' + state.button_state.class; // emaクラスは残す
+        const buttonState = state.button_state;
+        isLockedOpen = buttonState.is_locked_open; // ★重要: ローカル変数を同期
+        fixedCircle.style.backgroundColor = buttonState.en_color;
+        emergencyButton.textContent = buttonState.text;
+        emergencyButton.className = 'ema ' + buttonState.class; 
         
         // 【次回測定予定】の超過チェックは、データ受信後に手動で再実行
         checkNextMeasureOverdue();
@@ -369,14 +370,15 @@ document.addEventListener('DOMContentLoaded', () => {
      */
     socket.on('button_state_updated', (state) => {
     console.log('Button state updated:', state);
+    
+    // ★重要1: ローカル変数 isLockedOpen を受信データで上書き
     isLockedOpen = state.is_locked_open;
-    // ★修正点: 受信した最新の色でDOMを更新
+    
+    // ★重要2: 円の色とボタンのテキスト/クラスを受信データで上書き
     fixedCircle.style.backgroundColor = state.en_color;
     emergencyButton.textContent = state.text;
-    // クラス名全体を更新
     emergencyButton.className = 'ema ' + state.class; 
 });
-
     /**
      * 他のクライアントからのキー入力を表示に反映する処理
      */
